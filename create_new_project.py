@@ -2,7 +2,7 @@
 Created By: Fatih Mehmet UNAL
 - fatihunal@gmail.com
 - fatihmehmet.unal@1000volt.com
-Start new project; this widget creates to:
+-Start new project; this widget creates to:
 - 3D
 - edl
 - exports
@@ -12,7 +12,7 @@ Start new project; this widget creates to:
 - sources
 - telecine
 """
-
+from PySide.QtCore import QRegExp
 from PySide.QtGui import *
 import os
 import datetime
@@ -26,9 +26,16 @@ class startProjectWindow(QWidget):
 
         self.projectName = QLineEdit()
         self.projectName.setPlaceholderText("Project Name: ")
+        regex = QRegExp("[a-z-A-Z_ ]+")
+
+        Validator= QRegExpValidator(regex)
+        self.projectName.setValidator(Validator)
 
         self.projectCode = QLineEdit()
         self.projectCode.setPlaceholderText("FW Code: ")
+        regexCode = QRegExp("[0-9]+")
+        regexCodeValidator = QRegExpValidator(regexCode)
+        self.projectCode.setValidator(regexCodeValidator)
 
         self.infoTextNote = QLabel("You can put the info in to follow Textbox:")
         self.createNote = QTextEdit()
